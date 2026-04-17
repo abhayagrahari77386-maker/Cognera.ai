@@ -16,7 +16,7 @@ const features = [
     title: "Skill Gap Analyzer",
     desc: "Identify the exact skills you need to land your dream career — with precision.",
     color: "from-secondary to-primary",
-    path: "/explore",
+    path: "/skill-gap",
   },
   {
     icon: Compass,

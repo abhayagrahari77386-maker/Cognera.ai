@@ -42,13 +42,14 @@ const Hero = () => {
 
           <div className="flex flex-wrap gap-3 pt-4">
             {[
-              { icon: Sparkles, label: "AI Analysis" },
-              { icon: Map, label: "Roadmaps" },
-              { icon: Target, label: "Skill Gap Check" },
+              { icon: Sparkles, label: "AI Analysis", path: "/assessment" },
+              { icon: Map, label: "Roadmaps", path: "/counselor" },
+              { icon: Target, label: "Skill Gap Analyzer", path: "/skill-gap" },
             ].map((tag) => (
               <div
                 key={tag.label}
-                className="glass px-4 py-2 rounded-full text-sm flex items-center gap-2 hover:border-primary/40 transition-all hover:shadow-glow"
+                onClick={() => navigate(tag.path)}
+                className="cursor-pointer glass px-4 py-2 rounded-full text-sm flex items-center gap-2 hover:border-primary/40 transition-all hover:shadow-glow"
               >
                 <tag.icon className="h-4 w-4 text-primary" />
                 <span>{tag.label}</span>

@@ -14,6 +14,7 @@ type NavLink = { label: string; href: string; type: "anchor" | "route" };
 const links: NavLink[] = [
   { label: "Home", href: "/#home", type: "route" },
   { label: "Explore Careers", href: "/explore", type: "route" },
+  { label: "Skill Gap Analyzer", href: "/skill-gap", type: "route" },
   { label: "Roadmaps", href: "/#how", type: "route" },
   { label: "AI Counselor", href: "/counselor", type: "route" },
 ];

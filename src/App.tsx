@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import Assessment from "./pages/Assessment.tsx";
 import Counselor from "./pages/Counselor.tsx";
 import Explore from "./pages/Explore.tsx";
+import SkillGap from "./pages/SkillGap.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/assessment" element={<ProtectedRoute><Assessment /></ProtectedRoute>} />
           <Route path="/counselor" element={<ProtectedRoute><Counselor /></ProtectedRoute>} />
           <Route path="/explore" element={<Explore />} />
+          <Route path="/skill-gap" element={<ProtectedRoute><SkillGap /></ProtectedRoute>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

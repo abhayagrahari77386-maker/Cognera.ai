@@ -938,6 +938,82 @@ Return ONLY JSON with this exact shape:
   }
 });
 
+app.post('/api/skill-gap', async (req, res) => {
+  try {
+    if (!process.env.OPENROUTER_API_KEY) {
+      return res.status(400).json({ error: 'API Key Missing' });
+    }
+
+    const { cvText, targetCareer } = req.body;
+    
+    if (!isNonEmptyString(cvText)) {
+      return res.status(400).json({ error: 'CV Text is required.' });
+    }
+    
+    const isTargetProvided = isNonEmptyString(targetCareer);
+    const targetInstruction = isTargetProvided 
+      ? `the TARGET CAREER: ${targetCareer}` 
+      : `a highly suitable TARGET CAREER that you must automatically determine based on their current CV strengths`;
+
+    const requestPayload = {
+      "model": "google/gemini-2.0-flash-001",
+      "messages": [
+        { 
+          "role": "system", 
+          "content": `You are an expert career and skills analyst. The user has provided the text extracted from their PDF CV.
+          
+YOUR TASK:
+1. Analyze the user's CV to extract their CURRENT skills and experiences.
+2. Compare their current skills against the standard industry requirements for ${targetInstruction}.
+3. Identify the specific MISSING SKILLS (the "Skill Gap").
+4. Provide a structured, step-by-step roadmap for how the user can learn and acquire those specific missing skills to successfully transition into the target career.
+
+CRITICAL SAFETY RULES:
+- Output strictly valid JSON.
+- Do not make up skills the user has if they are not in the CV text.
+- Roadmap steps must be practical and actionable in India.
+${!isTargetProvided ? '- You MUST determine and output the best-fitting Target Career in the JSON.' : ''}
+
+Return ONLY JSON with this exact shape:
+{
+  "targetCareer": "string",
+  "estimatedTimePattern": "string (e.g. 3-6 months)",
+  "estimatedSalary": "string (e.g. 8-12 LPA)",
+  "currentSkills": ["string", "string"],
+  "missingSkills": ["string", "string"],
+  "roadmap": [
+    { "step": 1, "title": "string", "details": "string" }
+  ]
+}` 
+        },
+        { "role": "user", "content": `${isTargetProvided ? `Target Career: ${targetCareer}\n\n` : ''}CV Text: ${cvText.substring(0, 15000)}` }
+      ],
+      "response_format": { "type": "json_object" }
+    };
+
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        "HTTP-Referer": "http://localhost:8080",
+        "X-Title": "Cognera AI",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(requestPayload)
+    });
+
+    if (!response.ok) throw new Error('OpenRouter API error');
+
+    const data = await response.json();
+    const parsedData = parseJsonFromModelContent(data?.choices?.[0]?.message?.content);
+
+    res.json(parsedData);
+  } catch (error) {
+    console.error('Error in /api/skill-gap:', error);
+    res.status(500).json({ error: 'Failed to analyze skill gap', message: error.message });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
