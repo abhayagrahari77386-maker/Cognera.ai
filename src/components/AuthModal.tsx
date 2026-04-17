@@ -3,8 +3,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Flame, Mail, Lock, User } from "lucide-react";
+import { Flame, Mail, Lock, User, Loader2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+
+import { auth } from "@/lib/firebase";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 export type AuthMode = "login" | "signup";
 
@@ -22,11 +25,13 @@ const AuthModal = ({ open, mode, onOpenChange, onModeChange }: AuthModalProps) =
     password: "",
     confirmPassword: "",
   });
+  const [loading, setLoading] = useState(false);
 
   // Reset form when modal closes or mode switches
   useEffect(() => {
     if (!open) {
       setForm({ fullName: "", email: "", password: "", confirmPassword: "" });
+      setLoading(false);
     }
   }, [open, mode]);
 
@@ -34,30 +39,56 @@ const AuthModal = ({ open, mode, onOpenChange, onModeChange }: AuthModalProps) =
     setForm((prev) => ({ ...prev, [field]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
-    if (mode === "login") {
-      if (!form.email || !form.password) {
-        toast({ title: "Missing fields", description: "Email and password are required.", variant: "destructive" });
+    try {
+      if (mode === "login") {
+        if (!form.email || !form.password) {
+          toast({ title: "Missing fields", description: "Email and password are required.", variant: "destructive" });
+          setLoading(false);
+          return;
+        }
+        await signInWithEmailAndPassword(auth, form.email, form.password);
+        toast({ title: "Welcome back!", description: "Login successful." });
+        onOpenChange(false);
         return;
       }
-      toast({ title: "Welcome back!", description: "Login successful." });
-      onOpenChange(false);
-      return;
-    }
 
-    // Signup
-    if (!form.fullName || !form.email || !form.password || !form.confirmPassword) {
-      toast({ title: "Missing fields", description: "All fields are required.", variant: "destructive" });
-      return;
+      // Signup
+      if (!form.fullName || !form.email || !form.password || !form.confirmPassword) {
+        toast({ title: "Missing fields", description: "All fields are required.", variant: "destructive" });
+        setLoading(false);
+        return;
+      }
+      if (form.password !== form.confirmPassword) {
+        toast({ title: "Passwords don't match", description: "Please confirm your password.", variant: "destructive" });
+        setLoading(false);
+        return;
+      }
+      
+      const userCredential = await createUserWithEmailAndPassword(auth, form.email, form.password);
+      
+      if (userCredential.user) {
+        await updateProfile(userCredential.user, {
+          displayName: form.fullName
+        });
+      }
+      
+      toast({ title: "Account created!", description: "Welcome to Cognera AI." });
+      onOpenChange(false);
+    } catch (error: any) {
+      console.error("Auth error:", error);
+      let message = error.message;
+      if (error.code === 'auth/email-already-in-use') message = 'This email is already registered. Please login instead.';
+      if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') message = 'Invalid email or password.';
+      if (error.code === 'auth/weak-password') message = 'Password should be at least 6 characters.';
+
+      toast({ title: "Authentication failed", description: message, variant: "destructive" });
+    } finally {
+      if (open) setLoading(false);
     }
-    if (form.password !== form.confirmPassword) {
-      toast({ title: "Passwords don't match", description: "Please confirm your password.", variant: "destructive" });
-      return;
-    }
-    toast({ title: "Account created!", description: "Welcome to Cognera AI." });
-    onOpenChange(false);
   };
 
   const isLogin = mode === "login";
@@ -159,8 +190,11 @@ const AuthModal = ({ open, mode, onOpenChange, onModeChange }: AuthModalProps) =
             </div>
           )}
 
-          <Button type="submit" variant="hero" className="w-full mt-2">
-            {isLogin ? "Login" : "Create Account"}
+          <Button type="submit" variant="hero" className="w-full mt-2" disabled={loading}>
+            {loading ? (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            ) : null}
+            {loading ? "Please wait" : (isLogin ? "Login" : "Create Account")}
           </Button>
         </form>
 

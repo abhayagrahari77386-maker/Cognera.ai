@@ -8,6 +8,7 @@ import Assessment from "./pages/Assessment.tsx";
 import Counselor from "./pages/Counselor.tsx";
 import Explore from "./pages/Explore.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
 
 const queryClient = new QueryClient();
 
@@ -19,8 +20,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/assessment" element={<Assessment />} />
-          <Route path="/counselor" element={<Counselor />} />
+          <Route path="/assessment" element={<ProtectedRoute><Assessment /></ProtectedRoute>} />
+          <Route path="/counselor" element={<ProtectedRoute><Counselor /></ProtectedRoute>} />
           <Route path="/explore" element={<Explore />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
