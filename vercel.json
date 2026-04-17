@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/api/(.*)",
+      "source": "/api/(?!index\\.cjs)(.*)",
       "destination": "/api/index.cjs"
     },
     {
