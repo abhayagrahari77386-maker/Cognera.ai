@@ -112,7 +112,8 @@ const Assessment = () => {
     setLoading(true);
     
     try {
-      const response = await fetch("http://localhost:5000/api/predict", {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const response = await fetch(`${API_URL}/api/predict`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -158,7 +159,8 @@ const Assessment = () => {
   const generateAiQuestions = async () => {
     setQuestionsLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/assessment-questions", {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const response = await fetch(`${API_URL}/api/assessment-questions`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
