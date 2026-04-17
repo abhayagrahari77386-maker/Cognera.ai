@@ -939,10 +939,9 @@ Return ONLY JSON with this exact shape:
 });
 
 const PORT = process.env.PORT || 5000;
-if (process.env.NODE_ENV !== "production") {
-  app.listen(PORT, () => {
-    console.log(`Local dev server running on port ${PORT}`);
-  });
-}
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 module.exports = app;
+
