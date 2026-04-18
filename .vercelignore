@@ -1,0 +1,5 @@
+api/
+server/
+.env
+node_modules/
+dist/
