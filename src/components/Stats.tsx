@@ -43,18 +43,18 @@ const Counter = ({ end, suffix }: { end: number; suffix: string }) => {
 
 const Stats = () => {
   return (
-    <section className="py-20 relative">
+    <section className="py-20 relative bg-[#F8FAFC]">
       <div className="container relative">
         <div className="grid md:grid-cols-3 gap-6">
           {stats.map((s) => (
             <div
               key={s.label}
-              className="glass rounded-2xl p-8 text-center hover:border-primary/40 hover:shadow-glow transition-all duration-500"
+              className="bg-white border border-[#E5E7EB] rounded-2xl p-10 text-center hover:shadow-soft transition-all duration-300"
             >
-              <div className="font-display text-5xl md:text-6xl font-bold text-gradient mb-2">
+              <div className="font-display text-5xl md:text-6xl font-bold text-[#3B82F6] mb-3">
                 <Counter end={s.value} suffix={s.suffix} />
               </div>
-              <p className="text-muted-foreground font-medium">{s.label}</p>
+              <p className="text-[#64748B] font-medium tracking-wide uppercase text-xs">{s.label}</p>
             </div>
           ))}
         </div>

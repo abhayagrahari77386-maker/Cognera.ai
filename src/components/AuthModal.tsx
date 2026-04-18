@@ -101,18 +101,18 @@ const AuthModal = ({ open, mode, onOpenChange, onModeChange }: AuthModalProps) =
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md glass-strong border-primary/20 bg-background/80 backdrop-blur-2xl shadow-glow">
-        <DialogHeader className="text-center space-y-2">
-          <div className="mx-auto h-12 w-12 rounded-2xl bg-gradient-primary flex items-center justify-center shadow-glow">
-            <Flame className="h-6 w-6 text-primary-foreground" />
+      <DialogContent className="sm:max-w-md bg-white border border-[#E5E7EB] shadow-elevated overflow-hidden">
+        <DialogHeader className="text-center space-y-4">
+          <div className="mx-auto h-12 w-12 rounded-2xl bg-[#3B82F6] flex items-center justify-center shadow-soft">
+            <Flame className="h-6 w-6 text-white" />
           </div>
-          <DialogTitle className="text-2xl font-display font-bold tracking-tight text-center">
-            {isLogin ? "Welcome back" : "Create your account"}
+          <DialogTitle className="text-2xl font-display font-bold tracking-tight text-center text-[#0F172A]">
+            {isLogin ? "Welcome Back" : "Create Professional Profile"}
           </DialogTitle>
-          <DialogDescription className="text-center">
+          <DialogDescription className="text-center text-[#64748B] text-base">
             {isLogin
-              ? "Sign in to continue your career journey."
-              : "Start discovering your perfect career path with AI."}
+              ? "Sign in to access your professional dashboard."
+              : "Discover your perfect career path with AI-powered intelligence."}
           </DialogDescription>
         </DialogHeader>
 

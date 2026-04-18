@@ -7,7 +7,7 @@ const features = [
     emoji: "🤖",
     title: "AI Counselor",
     desc: "Chat with an intelligent counselor that understands your strengths, interests, and goals.",
-    color: "from-primary to-primary-glow",
+    color: "bg-[#DBEAFE] text-[#1D4ED8]",
     path: "/counselor",
   },
   {
@@ -15,7 +15,7 @@ const features = [
     emoji: "📊",
     title: "Skill Gap Analyzer",
     desc: "Identify the exact skills you need to land your dream career — with precision.",
-    color: "from-secondary to-primary",
+    color: "bg-[#F1F5F9] text-[#475569]",
     path: "/skill-gap",
   },
   {
@@ -23,7 +23,7 @@ const features = [
     emoji: "🧭",
     title: "Career Roadmap",
     desc: "Personalized step-by-step roadmaps designed by AI for your unique journey.",
-    color: "from-primary to-secondary",
+    color: "bg-[#EFF6FF] text-[#2563EB]",
     path: "/assessment",
   },
   {
@@ -31,7 +31,7 @@ const features = [
     emoji: "🎯",
     title: "Career Match",
     desc: "Discover careers that perfectly align with your personality and aspirations.",
-    color: "from-secondary to-primary-glow",
+    color: "bg-[#F0FDF4] text-[#166534]",
     path: "/assessment",
   },
 ];
@@ -40,17 +40,16 @@ const Features = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="features" className="py-20 lg:py-28 relative">
-      <div className="glow-orb w-[400px] h-[400px] bg-secondary/30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+    <section id="features" className="py-20 lg:py-28 relative bg-white">
       <div className="container relative">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex glass px-4 py-2 rounded-full text-sm mb-6">
-            <span className="text-primary">✦ Premium Features</span>
+          <div className="inline-flex bg-[#DBEAFE] px-4 py-2 rounded-full text-sm mb-6">
+            <span className="text-[#1D4ED8] font-medium">✦ Premium Features</span>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-            Everything you need to <span className="text-gradient">choose smarter</span>
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 text-[#0F172A]">
+            Everything you need to <span className="text-[#3B82F6]">choose smarter</span>
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-[#64748B] text-lg">
             Four powerful AI tools working together to map your future.
           </p>
         </div>
@@ -60,17 +59,16 @@ const Features = () => {
             <div
               key={f.title}
               onClick={() => navigate(f.path)}
-              className="group relative glass rounded-2xl p-6 transition-all duration-500 hover:-translate-y-2 hover:border-primary/40 hover:shadow-glow cursor-pointer"
+              className="group relative bg-white border border-[#E5E7EB] rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated cursor-pointer"
               style={{ animationDelay: `${i * 100}ms` }}
             >
-              <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity" />
-              <div className={`relative inline-flex p-3 rounded-xl bg-gradient-to-br ${f.color} mb-4 shadow-glow`}>
-                <f.icon className="h-6 w-6 text-primary-foreground" />
+              <div className={`relative inline-flex p-3 rounded-xl ${f.color} mb-6`}>
+                <f.icon className="h-6 w-6" />
               </div>
-              <h3 className="font-display text-xl font-bold mb-2 flex items-center gap-2">
+              <h3 className="font-display text-xl font-bold mb-3 flex items-center gap-2 text-[#0F172A]">
                 {f.title} <span className="text-base">{f.emoji}</span>
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
+              <p className="text-sm text-[#64748B] leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>

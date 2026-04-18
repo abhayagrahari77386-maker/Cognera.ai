@@ -4,24 +4,24 @@ import logo from "@/assets/cognera-logo.png";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border/50 py-12 relative">
+    <footer className="bg-[#F1F5F9] border-t border-border py-16 relative">
       <div className="container">
         <div className="grid md:grid-cols-3 gap-10 mb-10">
           <div>
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <img src={logo} alt="Cognera AI" className="h-9 w-9 rounded-lg" />
-              <span className="font-display font-bold text-xl">
-                Cognera <span className="text-gradient">AI</span>
+              <img src={logo} alt="Cognera AI" className="h-10 w-10 rounded-lg" />
+              <span className="font-display font-bold text-xl text-[#0F172A]">
+                Cognera <span className="text-[#3B82F6]">AI</span>
               </span>
             </Link>
-            <p className="text-sm text-muted-foreground max-w-xs">
+            <p className="text-sm text-[#64748B] max-w-xs">
               Think Deeper. Solve Smarter. Smarter choices for a smarter career.
             </p>
           </div>
 
           <div>
-            <h4 className="font-display font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <h4 className="font-display font-semibold mb-4 text-[#0F172A]">Quick Links</h4>
+            <ul className="space-y-2 text-sm text-[#64748B]">
               <li><Link to="/#home" className="hover:text-primary transition">Home</Link></li>
               <li><Link to="/explore" className="hover:text-primary transition">Explore Careers</Link></li>
               <li><Link to="/#how" className="hover:text-primary transition">Roadmaps</Link></li>
@@ -30,13 +30,13 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display font-semibold mb-4">Connect</h4>
+            <h4 className="font-display font-semibold mb-4 text-[#0F172A]">Connect</h4>
             <div className="flex gap-3">
               {[Twitter, Linkedin, Github, Instagram].map((Icon, i) => (
                 <a
                   key={i}
                   href="#"
-                  className="glass p-2.5 rounded-xl hover:border-primary/50 hover:shadow-glow hover:-translate-y-0.5 transition-all"
+                  className="bg-white border border-border p-2.5 rounded-xl hover:border-primary/50 hover:shadow-soft hover:-translate-y-0.5 transition-all text-[#475569]"
                   aria-label="Social link"
                 >
                   <Icon className="h-4 w-4" />
@@ -46,7 +46,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="pt-6 border-t border-border/50 text-center text-sm text-muted-foreground">
+        <div className="pt-8 border-t border-border/50 text-center text-sm text-[#64748B]">
           © 2026 Cognera AI. All rights reserved.
         </div>
       </div>

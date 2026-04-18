@@ -98,41 +98,41 @@ export default function SkillGap() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground pb-20 pt-24 px-4 sm:px-6">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#334155] pb-20 pt-24 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto space-y-8">
         
         {/* Header Section */}
         <div className="text-center space-y-4">
-          <div className="inline-flex items-center gap-2 glass px-4 py-1.5 rounded-full text-sm font-medium mb-2 text-primary">
+          <div className="inline-flex items-center gap-2 bg-[#DBEAFE] border border-[#BFDBFE] px-4 py-2 rounded-full text-sm font-semibold mb-2 text-[#1D4ED8]">
             <Brain className="w-4 h-4" /> Professional Analysis
           </div>
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight">AI Skill Gap Analyzer</h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Upload your CV and specify your target career. Our AI will analyze your current experience, 
-            identify critical missing skills, and generate a step-by-step roadmap to bridge the gap.
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-[#0F172A]">AI Skill Gap Analyzer</h1>
+          <p className="text-[#64748B] text-lg max-w-2xl mx-auto">
+            Upload your CV and specify your target career. Our AI will analyze your experience, 
+            identify critical missing skills, and generate a step-by-step roadmap.
           </p>
         </div>
 
         {/* Input Form Section */}
-        <div className="glass p-6 md:p-8 rounded-2xl border border-primary/10 shadow-lg space-y-6">
-          <div className="grid md:grid-cols-2 gap-8">
+        <div className="bg-white p-6 md:p-10 rounded-[2rem] border border-[#E5E7EB] shadow-soft space-y-8">
+          <div className="grid md:grid-cols-2 gap-10">
             
             {/* Left Col: Upload */}
             <div className="space-y-4">
-              <label className="text-sm font-semibold tracking-wide uppercase text-muted-foreground">
+              <label className="text-xs font-bold tracking-widest uppercase text-[#94A3B8]">
                 Step 1: Upload CV / Resume
               </label>
               
               {!file ? (
                 <div 
                   onClick={() => fileInputRef.current?.click()}
-                  className="border-2 border-dashed border-primary/30 rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-primary/5 hover:border-primary/50 transition-all group"
+                  className="border-2 border-dashed border-[#E2E8F0] rounded-2xl p-10 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#F8FAFC] hover:border-[#3B82F6] transition-all group bg-[#F8FAFC]/50"
                 >
-                  <div className="bg-primary/10 p-4 rounded-full mb-4 group-hover:scale-110 transition-transform">
-                    <Upload className="w-8 h-8 text-primary" />
+                  <div className="bg-white border border-[#E2E8F0] p-5 rounded-2xl mb-4 group-hover:scale-105 transition-transform shadow-sm">
+                    <Upload className="w-8 h-8 text-[#3B82F6]" />
                   </div>
-                  <h3 className="font-semibold mb-1">Click to browse</h3>
-                  <p className="text-xs text-muted-foreground">PDF formatting only (Max 5MB)</p>
+                  <h3 className="font-bold text-[#0F172A] mb-1">Click to browse CV</h3>
+                  <p className="text-xs text-[#64748B]">PDF document only (Max 5MB)</p>
                   <input 
                     type="file" 
                     accept="application/pdf" 
@@ -142,19 +142,19 @@ export default function SkillGap() {
                   />
                 </div>
               ) : (
-                <div className="border border-primary/20 bg-primary/5 rounded-xl p-6 flex items-center justify-between">
+                <div className="border border-[#3B82F6]/20 bg-[#EFF6FF] rounded-2xl p-6 flex items-center justify-between shadow-sm">
                   <div className="flex items-center gap-4 truncate">
-                    <div className="bg-primary/20 p-3 rounded-lg flex-shrink-0">
-                      <FileText className="w-6 h-6 text-primary" />
+                    <div className="bg-white p-3 rounded-xl border border-[#DBEAFE] flex-shrink-0">
+                      <FileText className="w-6 h-6 text-[#3B82F6]" />
                     </div>
                     <div className="truncate">
-                      <h4 className="font-semibold text-sm truncate">{file.name}</h4>
-                      <p className="text-xs text-muted-foreground">
+                      <h4 className="font-bold text-[#0F172A] text-sm truncate">{file.name}</h4>
+                      <p className="text-xs text-[#64748B] font-medium">
                         {(file.size / 1024 / 1024).toFixed(2)} MB • PDF Document
                       </p>
                     </div>
                   </div>
-                  <Button variant="ghost" size="sm" onClick={clearFile} className="text-destructive hover:text-destructive/80 hover:bg-destructive/10">
+                  <Button variant="ghost" size="sm" onClick={clearFile} className="text-[#EF4444] hover:text-[#DC2626] hover:bg-red-50 font-bold">
                     Remove
                   </Button>
                 </div>
@@ -164,18 +164,18 @@ export default function SkillGap() {
             {/* Right Col: Target Career */}
             <div className="space-y-4 flex flex-col justify-between">
               <div className="space-y-4">
-                <label className="text-sm font-semibold tracking-wide text-muted-foreground uppercase flex items-center gap-2">
-                  Step 2: Target Career <span className="text-xs font-normal bg-primary/10 text-primary px-2 py-0.5 rounded border border-primary/20">Optional</span>
+                <label className="text-xs font-bold tracking-widest text-[#94A3B8] uppercase flex items-center gap-2">
+                  Step 2: Target Career <span className="text-[10px] font-bold bg-[#F1F5F9] text-[#64748B] px-2 py-0.5 rounded border border-[#E2E8F0]">Optional</span>
                 </label>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <Input 
                     placeholder="e.g. Data Scientist, Product Manager..." 
-                    className="h-14 bg-background/50 border-primary/20 text-lg px-4"
+                    className="h-14 bg-white border-[#E2E8F0] text-lg px-5 focus-visible:ring-[#3B82F6]/20 rounded-xl"
                     value={targetCareer}
                     onChange={(e) => setTargetCareer(e.target.value)}
                   />
-                  <p className="text-xs text-muted-foreground px-1">
-                    If left blank, our AI will analyze your CV and automatically suggest the best-fitting career for you!
+                  <p className="text-xs text-[#64748B] px-1 font-medium italic">
+                    If left blank, our AI will suggest the best-fitting career for you based on your CV profile.
                   </p>
                 </div>
               </div>
@@ -184,15 +184,15 @@ export default function SkillGap() {
               <Button 
                 onClick={handleAnalyze} 
                 disabled={isAnalyzing || !file}
-                className="w-full h-14 text-lg font-semibold shadow-xl shadow-primary/20"
+                className="w-full h-14 text-lg font-bold bg-[#3B82F6] hover:bg-[#2563EB] text-white shadow-elevated rounded-xl"
               >
                 {isAnalyzing ? (
                   <>
-                    <Loader2 className="w-5 h-5 mr-3 animate-spin" /> Analyzing CV Data...
+                    <Loader2 className="w-5 h-5 mr-3 animate-spin" /> Analyzing Profile...
                   </>
                 ) : (
                   <>
-                    Detect Skill Gap <ArrowRight className="w-5 h-5 ml-2" />
+                    Analyze Skill Gap <ArrowRight className="w-5 h-5 ml-2" />
                   </>
                 )}
               </Button>
@@ -203,56 +203,57 @@ export default function SkillGap() {
 
         {/* Results Section */}
         {result && (
-          <div className="mt-12 space-y-8 animate-in slide-in-from-bottom-10 fade-in duration-500">
+          <div className="mt-12 space-y-8 animate-in slide-in-from-bottom-5 fade-in duration-500">
             <div className="text-center">
-              <h2 className="text-3xl font-bold mb-2">Analysis Results for <span className="text-primary">{result.targetCareer}</span></h2>
-              <p className="text-muted-foreground mb-6">Based on the rigorous comparison of your CV with standard industry requirements.</p>
+              <div className="h-1 w-20 bg-[#3B82F6] rounded-full mx-auto mb-6" />
+              <h2 className="text-3xl font-bold mb-3 text-[#0F172A]">Analysis for <span className="text-[#3B82F6]">{result.targetCareer}</span></h2>
+              <p className="text-[#64748B] mb-8 max-w-xl mx-auto">Based on the rigorous comparison of your profile with industry benchmarks.</p>
               
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
+              <div className="flex flex-wrap justify-center gap-4 mb-10">
                 {result.estimatedTimePattern && (
-                  <div className="flex items-center gap-2 glass px-4 py-2 rounded-full border border-primary/20 bg-background/50">
-                    <Clock className="w-5 h-5 text-primary" />
-                    <span className="text-sm font-medium">Estimated Time to Bridge Gap: <span className="text-foreground">{result.estimatedTimePattern}</span></span>
+                  <div className="flex items-center gap-3 bg-white border border-[#E2E8F0] px-5 py-3 rounded-2xl shadow-soft">
+                    <Clock className="w-5 h-5 text-[#3B82F6]" />
+                    <span className="text-sm font-bold text-[#64748B]">Time to Bridge Gap: <span className="text-[#0F172A]">{result.estimatedTimePattern}</span></span>
                   </div>
                 )}
                 {result.estimatedSalary && (
-                  <div className="flex items-center gap-2 glass px-4 py-2 rounded-full border border-green-500/20 bg-green-500/5">
-                    <IndianRupee className="w-5 h-5 text-green-500" />
-                    <span className="text-sm font-medium">Potential Starting Salary: <span className="text-foreground">{result.estimatedSalary}</span></span>
+                  <div className="flex items-center gap-3 bg-white border border-[#E2E8F0] px-5 py-3 rounded-2xl shadow-soft">
+                    <IndianRupee className="w-5 h-5 text-[#10B981]" />
+                    <span className="text-sm font-bold text-[#64748B]">Potential Salary: <span className="text-[#0F172A]">{result.estimatedSalary}</span></span>
                   </div>
                 )}
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-8">
               {/* Acquired Skills */}
-              <div className="glass p-6 rounded-xl border border-green-500/20 bg-green-500/5">
-                <h3 className="font-semibold text-lg flex items-center gap-2 mb-4 text-green-400">
-                  <CheckCircle2 className="w-5 h-5" /> Verified Current Skills
+              <div className="bg-white border border-[#E2E8F0] p-8 rounded-[2rem] shadow-soft">
+                <h3 className="font-bold text-lg flex items-center gap-3 mb-6 text-[#10B981]">
+                  <CheckCircle2 className="w-6 h-6" /> Current Strengths
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {result.currentSkills.length > 0 ? result.currentSkills.map((skill, idx) => (
-                    <span key={idx} className="bg-green-500/10 border border-green-500/30 text-green-400 px-3 py-1 text-sm rounded-full">
+                    <span key={idx} className="bg-[#ECFDF5] border border-[#D1FAE5] text-[#047857] px-4 py-1.5 text-xs font-bold rounded-full">
                       {skill}
                     </span>
                   )) : (
-                    <span className="text-muted-foreground text-sm italic">No directly relevant skills detected in document.</span>
+                    <span className="text-[#64748B] text-sm italic">No relevant skills detected in the document yet.</span>
                   )}
                 </div>
               </div>
 
               {/* Missing Skills */}
-              <div className="glass p-6 rounded-xl border border-destructive/20 bg-destructive/5">
-                <h3 className="font-semibold text-lg flex items-center gap-2 mb-4 text-destructive">
-                  <XCircle className="w-5 h-5" /> The Skill Gap
+              <div className="bg-white border border-[#E2E8F0] p-8 rounded-[2rem] shadow-soft">
+                <h3 className="font-bold text-lg flex items-center gap-3 mb-6 text-[#EF4444]">
+                  <XCircle className="w-6 h-6" /> Skills to Acquire
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {result.missingSkills.length > 0 ? result.missingSkills.map((skill, idx) => (
-                    <span key={idx} className="bg-destructive/10 border border-destructive/30 text-destructive px-3 py-1 text-sm rounded-full">
+                    <span key={idx} className="bg-[#FEF2F2] border border-[#FEE2E2] text-[#B91C1C] px-4 py-1.5 text-xs font-bold rounded-full">
                       {skill}
                     </span>
                   )) : (
-                    <span className="text-muted-foreground text-sm italic">You have all the core skills required! Excellent match.</span>
+                    <span className="text-[#64748B] text-sm italic">You have all the core skills required! Excellent.</span>
                   )}
                 </div>
               </div>
@@ -260,23 +261,23 @@ export default function SkillGap() {
 
             {/* AI Roadmap */}
             {result.roadmap && result.roadmap.length > 0 && (
-              <div className="glass p-8 rounded-2xl border border-primary/20 relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-8 opacity-5">
-                  <Brain className="w-48 h-48" />
+              <div className="bg-[#0F172A] p-8 md:p-12 rounded-[2.5rem] relative overflow-hidden text-white shadow-elevated">
+                <div className="absolute top-0 right-0 p-8 opacity-10">
+                  <Brain className="w-64 h-64 text-[#3B82F6]" />
                 </div>
                 
-                <h3 className="text-2xl font-bold mb-6">Your Personal Roadmap</h3>
-                <p className="text-muted-foreground mb-8">Follow this recommended pathway to acquire your missing skills effectively.</p>
+                <h3 className="text-3xl font-bold mb-4 relative z-10">Strategic Roadmap</h3>
+                <p className="text-blue-200/80 mb-10 relative z-10 font-medium">Follow this step-by-step pathway to acquire your missing skills effectively.</p>
                 
-                <div className="space-y-6 relative z-10">
+                <div className="space-y-8 relative z-10">
                   {result.roadmap.map((step, idx) => (
-                    <div key={idx} className="flex gap-4 items-start">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center bg-primary/20 text-primary font-bold flex-shrink-0 border border-primary/30 shadow-[0_0_15px_rgba(var(--primary),0.2)]">
+                    <div key={idx} className="flex gap-6 items-start group">
+                      <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-[#3B82F6] text-white font-bold flex-shrink-0 shadow-lg group-hover:scale-105 transition-transform">
                         {step.step || idx + 1}
                       </div>
-                      <div className="border border-border/50 bg-background/50 rounded-xl p-5 flex-1 shadow-sm">
-                        <h4 className="font-bold text-lg mb-2 text-foreground">{step.title}</h4>
-                        <p className="text-muted-foreground text-sm leading-relaxed">{step.details}</p>
+                      <div className="bg-white/5 border border-white/10 rounded-[1.5rem] p-6 flex-1 backdrop-blur-sm group-hover:bg-white/10 transition-colors">
+                        <h4 className="font-bold text-xl mb-3 text-white">{step.title}</h4>
+                        <p className="text-blue-100/70 text-sm leading-relaxed">{step.details}</p>
                       </div>
                     </div>
                   ))}

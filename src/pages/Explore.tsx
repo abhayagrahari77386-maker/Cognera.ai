@@ -281,172 +281,160 @@ const Explore = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#334155] overflow-x-hidden">
       <Navbar />
-
-      {/* Ambient background */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute inset-0 grid-bg opacity-30" />
-        <div className="glow-orb bg-primary/30 w-[420px] h-[420px] -top-20 -left-20 animate-float-slow" />
-        <div className="glow-orb bg-secondary/30 w-[460px] h-[460px] top-1/2 -right-24 animate-float" />
-      </div>
 
       <main className="container pt-32 pb-20">
         {/* Header */}
-        <section className="text-center max-w-3xl mx-auto mb-10 animate-fade-up">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-5">
-            <Sparkles className="h-4 w-4 text-primary" />
-            <span className="text-xs font-medium text-muted-foreground">
+        <section className="text-center max-w-3xl mx-auto mb-12 animate-fade-up">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#DBEAFE] border border-[#BFDBFE] mb-6">
+            <Sparkles className="h-4 w-4 text-[#3B82F6]" />
+            <span className="text-xs font-semibold text-[#1D4ED8]">
               Career Discovery
             </span>
           </div>
-          <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight mb-4">
-            Explore <span className="text-gradient">Careers</span>
+          <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight mb-4 text-[#0F172A]">
+            Explore <span className="text-[#3B82F6]">Careers</span>
           </h1>
-          <p className="text-muted-foreground text-base md:text-lg">
+          <p className="text-[#64748B] text-lg">
             Search roles, filter by salary and category, and discover what fits
             your strengths.
           </p>
         </section>
 
         {/* Search + Filters */}
-        <section className="max-w-5xl mx-auto mb-10">
-          <div className="glass-strong rounded-2xl p-4 md:p-5 shadow-card">
+        <section className="max-w-5xl mx-auto mb-12">
+          <div className="bg-white border border-[#E5E7EB] rounded-2xl p-6 md:p-8 shadow-soft">
             <div className="flex flex-col md:flex-row gap-3 md:items-center">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#94A3B8]" />
                 <Input
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search careers, skills, or roles…"
-                  className="pl-9 h-12 bg-background/40 border-border/60 focus-visible:ring-primary/40"
+                  className="pl-9 h-12 bg-white border-[#E2E8F0] focus-visible:ring-[#3B82F6]/20"
                 />
               </div>
-              <Button variant="hero" size="lg" className="md:w-auto w-full">
-                <Search className="mr-1 h-4 w-4" /> Search
+              <Button variant="hero" size="lg" className="md:w-60 w-full bg-[#3B82F6] text-white hover:bg-[#2563EB]">
+                <Search className="mr-1 h-5 w-5" /> Search
               </Button>
             </div>
-            <div className="mt-3">
-              <Button
-                variant="outline"
-                size="sm"
-                className="w-full md:w-auto border-primary/30 hover:border-primary/60 hover:bg-primary/10"
-                onClick={() => fetchRoadmapByTitle(query)}
-              >
-                View Roadmap For "{query.trim() || "Typed Career"}"
-              </Button>
+            
+            <div className="mt-4">
+              <span className="text-xs font-semibold text-[#94A3B8] uppercase tracking-wider block mb-3">Filter by Category</span>
+              <div className="flex flex-wrap gap-2">
+                {CATEGORIES.map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => setCategory(c)}
+                    className={`text-sm px-4 py-2 rounded-lg border transition-all ${
+                      category === c
+                        ? "bg-[#3B82F6] border-[#3B82F6] text-white shadow-soft"
+                        : "bg-[#F1F5F9] border-[#E2E8F0] text-[#334155] hover:border-[#3B82F6]/50"
+                    }`}
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-[auto_1fr_1fr] gap-3 mt-4 items-center">
-              <div className="hidden md:flex items-center gap-2 text-muted-foreground text-sm">
-                <Filter className="h-4 w-4" /> Filters
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 pt-6 border-t border-[#F1F5F9]">
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-[#64748B] uppercase">Experience Level</label>
+                <Select
+                  value={category}
+                  onValueChange={(v) => setCategory(v as "All" | Category)}
+                >
+                  <SelectTrigger className="bg-white border-[#E2E8F0] h-11">
+                    <SelectValue placeholder="All Domains" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {CATEGORIES.map((c) => (
+                      <SelectItem key={c} value={c}>
+                        {c}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
-              <Select
-                value={category}
-                onValueChange={(v) => setCategory(v as "All" | Category)}
-              >
-                <SelectTrigger className="bg-background/40 border-border/60">
-                  <SelectValue placeholder="Category" />
-                </SelectTrigger>
-                <SelectContent>
-                  {CATEGORIES.map((c) => (
-                    <SelectItem key={c} value={c}>
-                      {c}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              <Select
-                value={salary}
-                onValueChange={(v) => setSalary(v as SalaryBucket | "all")}
-              >
-                <SelectTrigger className="bg-background/40 border-border/60">
-                  <SelectValue placeholder="Salary range" />
-                </SelectTrigger>
-                <SelectContent>
-                  {SALARY_BUCKETS.map((b) => (
-                    <SelectItem key={b.id} value={b.id}>
-                      {b.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="flex flex-wrap gap-2 mt-4">
-              {CATEGORIES.map((c) => (
-                <button
-                  key={c}
-                  onClick={() => setCategory(c)}
-                  className={`text-xs px-3 py-1.5 rounded-full border transition-all ${
-                    category === c
-                      ? "bg-gradient-primary border-transparent text-primary-foreground shadow-glow"
-                      : "border-border/60 text-muted-foreground hover:text-foreground hover:border-primary/40"
-                  }`}
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-[#64748B] uppercase">Salary Range</label>
+                <Select
+                  value={salary}
+                  onValueChange={(v) => setSalary(v as SalaryBucket | "all")}
                 >
-                  {c}
-                </button>
-              ))}
+                  <SelectTrigger className="bg-white border-[#E2E8F0] h-11">
+                    <SelectValue placeholder="Any Compensation" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {SALARY_BUCKETS.map((b) => (
+                      <SelectItem key={b.id} value={b.id}>
+                        {b.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
 
-          <div className="text-sm text-muted-foreground mt-4 px-1">
-            Showing{" "}
-            <span className="text-foreground font-semibold">
+          <div className="text-sm text-[#64748B] mt-5 px-1 font-medium italic">
+            Found{" "}
+            <span className="text-[#0F172A] font-bold">
               {filtered.length}
             </span>{" "}
-            {filtered.length === 1 ? "career" : "careers"}
+            {filtered.length === 1 ? "career" : "careers"} matching your criteria
           </div>
         </section>
 
         {/* Career grid */}
         <section className="max-w-7xl mx-auto">
           {filtered.length === 0 ? (
-            <div className="glass rounded-2xl p-12 text-center animate-fade-up">
-              <p className="text-lg font-semibold mb-1">
-                No careers match your search.
+            <div className="bg-white border border-[#E5E7EB] rounded-2xl p-16 text-center animate-fade-up shadow-soft">
+              <div className="bg-[#F1F5F9] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Filter className="h-8 w-8 text-[#94A3B8]" />
+              </div>
+              <p className="text-lg font-bold text-[#0F172A] mb-2">
+                No matching careers found
               </p>
-              <p className="text-sm text-muted-foreground">
-                Try clearing filters or searching for a skill like “Python” or
-                “Design”.
+              <p className="text-[#64748B]">
+                Try adjusting your filters or search terms for a broader range of results.
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filtered.map((c, i) => (
                 <article
                   key={c.id}
-                  style={{ animationDelay: `${i * 40}ms` }}
-                  className="group relative bg-gradient-card glass rounded-2xl p-5 shadow-card hover:shadow-elevated hover:-translate-y-1 transition-all duration-300 animate-fade-up overflow-hidden"
+                  style={{ animationDelay: `${i * 30}ms` }}
+                  className="group relative bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-card hover:shadow-elevated transition-all duration-300 animate-fade-up flex flex-col h-full"
                 >
-                  <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-primary/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                  <div className="flex items-start justify-between mb-3 relative">
+                  <div className="flex items-start justify-between mb-4">
                     <Badge
                       variant="outline"
-                      className="border-primary/30 text-primary bg-primary/10"
+                      className="border-[#DBEAFE] text-[#3B82F6] bg-[#EFF6FF] px-2.5 py-1"
                     >
                       {c.category}
                     </Badge>
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-xs font-bold text-[#10B981] bg-[#ECFDF5] px-2 py-1 rounded-md">
                       ₹{c.salaryMin}–{c.salaryMax} LPA
                     </span>
                   </div>
 
-                  <h3 className="font-display text-xl font-bold mb-1.5 relative">
+                  <h3 className="font-display text-xl font-bold mb-2 text-[#0F172A] group-hover:text-[#3B82F6] transition-colors">
                     {c.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4 relative">
+                  <p className="text-sm text-[#64748B] mb-6 line-clamp-2">
                     {c.blurb}
                   </p>
 
-                  <div className="flex flex-wrap gap-1.5 mb-5 relative">
+                  <div className="flex flex-wrap gap-1.5 mb-8 mt-auto">
                     {c.skills.slice(0, 4).map((s) => (
                       <span
                         key={s}
-                        className="text-[11px] px-2 py-1 rounded-md bg-muted/60 text-muted-foreground border border-border/60"
+                        className="text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded-md bg-[#F1F5F9] text-[#475569] border border-[#E2E8F0]"
                       >
                         {s}
                       </span>
@@ -457,9 +445,9 @@ const Explore = () => {
                     variant="outline"
                     size="sm"
                     onClick={() => handleRoadmap(c)}
-                    className="w-full border-primary/30 hover:border-primary/60 hover:bg-primary/10 relative"
+                    className="w-full border-[#3B82F6]/20 text-[#3B82F6] hover:bg-[#3B82F6] hover:text-white transition-all font-bold"
                   >
-                    View Roadmap <ArrowRight className="ml-1 h-4 w-4" />
+                    View Roadmap <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </article>
               ))}
@@ -469,89 +457,99 @@ const Explore = () => {
       </main>
 
       <Dialog open={showRoadmap} onOpenChange={setShowRoadmap}>
-        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-white p-0">
           {loadingRoadmap ? (
-            <div className="py-20 flex flex-col items-center text-center">
-              <Loader2 className="h-10 w-10 text-primary animate-spin mb-4" />
-              <DialogTitle>Generating Roadmap</DialogTitle>
-              <DialogDescription>
-                Our AI is crafting a detailed career path for {selectedCareer?.title || query.trim() || "your selected career"}...
+            <div className="py-24 flex flex-col items-center text-center px-6">
+              <Loader2 className="h-12 w-12 text-[#3B82F6] animate-spin mb-6" />
+              <DialogTitle className="text-2xl font-bold text-[#0F172A]">Crafting Roadmap</DialogTitle>
+              <DialogDescription className="text-[#64748B] text-lg max-w-sm">
+                Our AI is building a comprehensive path for <span className="text-[#0F172A] font-bold">{selectedCareer?.title || "your selected career"}</span>...
               </DialogDescription>
             </div>
           ) : roadmap ? (
-            <>
-              <DialogHeader>
-                <DialogTitle className="text-2xl md:text-3xl font-bold">
-                  Roadmap: <span className="text-gradient">{roadmap.title}</span>
-                </DialogTitle>
-                <DialogDescription className="mt-2">
-                  {roadmap.overview}
-                </DialogDescription>
-              </DialogHeader>
+            <div className="relative">
+              <div className="bg-[#F8FAFC] border-b border-[#E2E8F0] p-8">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl md:text-3xl font-bold text-[#0F172A]">
+                    Career Path: <span className="text-[#3B82F6]">{roadmap.title}</span>
+                  </DialogTitle>
+                  <DialogDescription className="mt-4 text-[#334155] text-base leading-relaxed">
+                    {roadmap.overview}
+                  </DialogDescription>
+                </DialogHeader>
+              </div>
 
-              <div className="mt-6 space-y-6">
-                <div className="space-y-4">
-                  <h4 className="font-bold text-lg border-b pb-1">Path to Success</h4>
-                  <div className="space-y-4">
+              <div className="p-8 space-y-8">
+                <div className="space-y-6">
+                  <div className="flex items-center gap-2 mb-6">
+                    <div className="h-1 w-8 bg-[#3B82F6] rounded-full" />
+                    <h4 className="font-bold text-lg text-[#0F172A] uppercase tracking-wide">Path to Success</h4>
+                  </div>
+                  
+                  <div className="space-y-6 relative ml-4 border-l-2 border-[#DBEAFE] pl-8 pb-4">
                     {roadmap.steps.map((step, i: number) => (
-                      <div key={i} className="flex gap-4 items-start">
-                        <div className="h-7 w-7 rounded-full bg-primary/20 text-primary flex items-center justify-center flex-shrink-0 font-bold text-xs">
+                      <div key={i} className="relative group">
+                        <div className="absolute -left-[45px] top-1 h-8 w-8 rounded-full bg-white border-2 border-[#3B82F6] text-[#3B82F6] flex items-center justify-center font-bold text-sm shadow-soft">
                           {step.step}
                         </div>
                         <div>
-                          <h5 className="font-bold text-sm">{step.title}</h5>
-                          <p className="text-xs text-muted-foreground">{step.details}</p>
+                          <h5 className="font-bold text-base text-[#0F172A] mb-1">{step.title}</h5>
+                          <p className="text-sm text-[#64748B] leading-relaxed">{step.details}</p>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="glass p-4 rounded-xl">
-                    <h5 className="text-xs font-bold text-muted-foreground mb-2 uppercase tracking-wider flex items-center gap-1">
-                      <Check className="h-3 w-3" /> Key Skills
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="bg-white border border-[#E2E8F0] p-5 rounded-2xl shadow-soft">
+                    <h5 className="text-xs font-bold text-[#94A3B8] mb-4 uppercase tracking-widest flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#3B82F6]" /> Required Skills
                     </h5>
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-2">
                       {roadmap.skills.map((s, i: number) => (
-                        <Badge key={i} variant="secondary" className="text-[10px]">{s}</Badge>
+                        <Badge key={i} variant="secondary" className="bg-[#EFF6FF] text-[#2563EB] border-transparent hover:bg-[#DBEAFE] transition-colors">{s}</Badge>
                       ))}
                     </div>
                   </div>
-                  <div className="glass p-4 rounded-xl">
-                    <h5 className="text-xs font-bold text-muted-foreground mb-2 uppercase tracking-wider flex items-center gap-1">
-                      <Flame className="h-3 w-3" /> Entrance Exams
+                  <div className="bg-white border border-[#E2E8F0] p-5 rounded-2xl shadow-soft">
+                    <h5 className="text-xs font-bold text-[#94A3B8] mb-4 uppercase tracking-widest flex items-center gap-2">
+                      <Flame className="h-4 w-4 text-[#F59E0B]" /> Key Exams
                     </h5>
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-2">
                       {roadmap.exams.map((e, i: number) => (
-                        <Badge key={i} variant="outline" className="text-[10px] border-primary/30">{e}</Badge>
+                        <Badge key={i} variant="outline" className="border-[#FDE68A] text-[#B45309] bg-[#FFFBEB]">{e}</Badge>
                       ))}
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-primary/5 p-4 rounded-xl border border-primary/10">
-                  <div className="text-xs font-bold text-primary mb-1 uppercase">Expected Salary (India)</div>
-                  <div className="text-lg font-bold">{roadmap.salaryRange}</div>
-                  <div className="text-sm text-muted-foreground mt-1">
-                    Starting income: ₹{roadmap.startingIncomeLPA} LPA
+                <div className="bg-[#3B82F6] p-6 rounded-2xl text-white shadow-elevated">
+                  <div className="text-xs font-bold text-blue-100 mb-2 uppercase tracking-widest">Typical Salary (India)</div>
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="text-3xl font-bold">₹{roadmap.salaryRange}</span>
+                    <span className="text-blue-100">LPA</span>
+                  </div>
+                  <div className="text-sm text-blue-50 font-medium">
+                    Initial intake: ₹{roadmap.startingIncomeLPA} LPA
                   </div>
                 </div>
 
-                <div className="bg-muted/30 p-4 rounded-xl border border-border/60">
-                  <div className="text-xs font-bold text-muted-foreground mb-2 uppercase">
-                    API Salary Verification Notes
+                <div className="bg-[#F1F5F9] p-5 rounded-2xl border border-[#E2E8F0]">
+                  <div className="text-xs font-bold text-[#64748B] mb-3 uppercase tracking-wider">
+                    Verification & Market Insights
                   </div>
-                  <ul className="space-y-1">
+                  <ul className="space-y-2">
                     {roadmap.salaryEvidence.map((item, i: number) => (
-                      <li key={i} className="text-xs text-muted-foreground">
-                        • {item}
+                      <li key={i} className="text-xs text-[#334155] flex items-start gap-2">
+                        <div className="h-1.5 w-1.5 rounded-full bg-[#3B82F6] mt-1 flex-shrink-0" />
+                        {item}
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
-            </>
+            </div>
           ) : null}
         </DialogContent>
       </Dialog>

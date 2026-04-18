@@ -195,64 +195,57 @@ const Assessment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#334155] overflow-x-hidden">
       <Navbar />
-
-      {/* Background blobs */}
-      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <div className="glow-orb bg-primary/30 w-[500px] h-[500px] -top-32 -left-32 animate-float-slow" />
-        <div className="glow-orb bg-secondary/30 w-[600px] h-[600px] top-1/2 -right-40 animate-float" />
-        <div className="absolute inset-0 grid-bg opacity-30" />
-      </div>
 
       <main className="container pt-32 pb-20">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-10 animate-fade-up">
-            <div className="inline-flex items-center gap-2 glass px-4 py-1.5 rounded-full text-xs font-medium mb-5">
-              <Sparkles className="h-3.5 w-3.5 text-primary" />
-              <span className="text-muted-foreground">AI Career Assessment</span>
+          <div className="text-center mb-12 animate-fade-up">
+            <div className="inline-flex items-center gap-2 bg-[#DBEAFE] border border-[#BFDBFE] px-4 py-2 rounded-full text-xs font-bold mb-6">
+              <Sparkles className="h-4 w-4 text-[#3B82F6]" />
+              <span className="text-[#1D4ED8]">AI Career Intelligence</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-3">
-              Find your <span className="text-gradient">perfect career path</span>
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-[#0F172A]">
+              Unlock Your <span className="text-[#3B82F6]">Potential</span>
             </h1>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              Answer a few quick questions and let our AI craft a personalized roadmap for your future.
+            <p className="text-[#64748B] text-lg max-w-xl mx-auto">
+              Answer 10 short questions and let our advanced AI engine map your ideal career roadmap.
             </p>
           </div>
 
           {/* Stepper */}
-          <div className="mb-10">
-            <div className="flex items-center justify-between gap-2 md:gap-4">
+          <div className="mb-12">
+            <div className="flex items-center justify-between gap-2 md:gap-4 relative">
               {STEPS.map((s, idx) => {
                 const isActive = step === s.id;
                 const isDone = step > s.id;
                 return (
-                  <div key={s.id} className="flex-1 flex items-center gap-2 md:gap-4">
+                  <div key={s.id} className="flex-1 flex items-center gap-2 md:gap-4 relative z-10">
                     <div className="flex flex-col items-center gap-2 flex-shrink-0">
                       <div
-                        className={`relative h-10 w-10 md:h-12 md:w-12 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-500 ${
+                        className={`relative h-10 w-10 md:h-12 md:w-12 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-500 border-2 ${
                           isDone
-                            ? "bg-gradient-primary text-primary-foreground shadow-glow"
+                            ? "bg-[#3B82F6] border-[#3B82F6] text-white"
                             : isActive
-                            ? "bg-gradient-primary text-primary-foreground shadow-glow animate-pulse-glow"
-                            : "glass text-muted-foreground"
+                            ? "bg-white border-[#3B82F6] text-[#3B82F6] shadow-soft"
+                            : "bg-[#F1F5F9] border-[#E2E8F0] text-[#94A3B8]"
                         }`}
                       >
                         {isDone ? <Check className="h-5 w-5" /> : s.id}
                       </div>
                       <span
-                        className={`text-[11px] md:text-xs font-medium whitespace-nowrap transition-colors ${
-                          isActive || isDone ? "text-foreground" : "text-muted-foreground"
+                        className={`text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors ${
+                          isActive || isDone ? "text-[#0F172A]" : "text-[#94A3B8]"
                         }`}
                       >
                         {s.label}
                       </span>
                     </div>
                     {idx < STEPS.length - 1 && (
-                      <div className="flex-1 h-[2px] bg-border/50 rounded-full overflow-hidden -mt-6">
+                      <div className="flex-1 h-[2px] bg-[#E2E8F0] rounded-full overflow-hidden mb-6">
                         <div
-                          className={`h-full bg-gradient-primary transition-all duration-700 ${
+                          className={`h-full bg-[#3B82F6] transition-all duration-700 ${
                             step > s.id ? "w-full" : "w-0"
                           }`}
                         />
@@ -265,45 +258,45 @@ const Assessment = () => {
           </div>
 
           {/* Card */}
-          <div className="glass rounded-3xl p-6 md:p-10 shadow-card animate-scale-in">
+          <div className="bg-white border border-[#E5E7EB] rounded-[2rem] p-6 md:p-12 shadow-soft animate-scale-in">
             {step === 1 && (
-              <div className="space-y-6 animate-fade-up">
+              <div className="space-y-8 animate-fade-up">
                 <div>
-                  <h2 className="text-2xl font-semibold mb-1">Basic Info</h2>
-                  <p className="text-sm text-muted-foreground">Tell us a little about yourself.</p>
+                  <h2 className="text-2xl font-bold text-[#0F172A] mb-2">Personal Profile</h2>
+                  <p className="text-[#64748B] font-medium italic">Let's start with your basic educational background.</p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-5">
+                <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="fullName">Full Name</Label>
+                    <Label htmlFor="fullName" className="text-xs font-bold text-[#64748B] uppercase tracking-wider">Full Name</Label>
                     <Input
                       id="fullName"
-                      placeholder="Jane Doe"
+                      placeholder="e.g. Abhay Agrahari"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="h-12 bg-background/40 border-border focus-visible:ring-primary/60 focus-visible:border-primary/60 transition-all"
+                      className="h-14 bg-[#F8FAFC] border-[#E2E8F0] focus-visible:ring-[#3B82F6]/20 transition-all rounded-xl text-base px-5"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email" className="text-xs font-bold text-[#64748B] uppercase tracking-wider">Email Address</Label>
                     <Input
                       id="email"
                       type="email"
                       placeholder="you@example.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="h-12 bg-background/40 border-border focus-visible:ring-primary/60 focus-visible:border-primary/60 transition-all"
+                      className="h-14 bg-[#F8FAFC] border-[#E2E8F0] focus-visible:ring-[#3B82F6]/20 transition-all rounded-xl text-base px-5"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Education Level</Label>
+                  <Label className="text-xs font-bold text-[#64748B] uppercase tracking-wider">Education Level</Label>
                   <Select value={education} onValueChange={setEducation}>
-                    <SelectTrigger className="h-12 bg-background/40 border-border">
-                      <SelectValue placeholder="Select your education level" />
+                    <SelectTrigger className="h-14 bg-[#F8FAFC] border-[#E2E8F0] rounded-xl text-base">
+                      <SelectValue placeholder="Select your current education" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="rounded-xl">
                       {EDUCATION_LEVELS.map((e) => (
                         <SelectItem key={e} value={e}>
                           {e}
@@ -313,27 +306,27 @@ const Assessment = () => {
                   </Select>
                 </div>
 
-                <div className="flex justify-end pt-2">
-                  <Button variant="hero" size="lg" onClick={handleNext}>
-                    Continue
+                <div className="flex justify-end pt-4">
+                  <Button variant="hero" size="lg" onClick={handleNext} className="bg-[#3B82F6] hover:bg-[#2563EB] text-white px-10 h-14 rounded-xl font-bold shadow-soft">
+                    Continue to Skills
                   </Button>
                 </div>
               </div>
             )}
 
             {step === 2 && (
-              <div className="space-y-6 animate-fade-up">
+              <div className="space-y-8 animate-fade-up">
                 <div>
-                  <h2 className="text-2xl font-semibold mb-1">Skills & Interests</h2>
-                  <p className="text-sm text-muted-foreground">
-                    Help our AI understand what drives you.
+                  <h2 className="text-2xl font-bold text-[#0F172A] mb-2">Strengths & Goals</h2>
+                  <p className="text-[#64748B] font-medium italic">
+                    Tell us what you're good at and what you aspire to be.
                   </p>
                 </div>
 
                 {/* Interests */}
-                <div className="space-y-3">
-                  <Label>Interests</Label>
-                  <div className="flex flex-wrap gap-2">
+                <div className="space-y-4">
+                  <Label className="text-xs font-bold text-[#64748B] uppercase tracking-wider">Interests & Domains</Label>
+                  <div className="flex flex-wrap gap-2.5">
                     {INTEREST_OPTIONS.map((i) => {
                       const active = interests.includes(i);
                       return (
@@ -341,10 +334,10 @@ const Assessment = () => {
                           type="button"
                           key={i}
                           onClick={() => toggleInterest(i)}
-                          className={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 ${
+                          className={`px-5 py-2.5 rounded-xl text-sm font-bold border transition-all duration-300 ${
                             active
-                              ? "bg-gradient-primary text-primary-foreground border-transparent shadow-glow scale-105"
-                              : "glass border-border hover:border-primary/50 hover:text-foreground text-muted-foreground"
+                              ? "bg-[#3B82F6] text-white border-[#3B82F6] shadow-soft scale-105"
+                              : "bg-[#F8FAFC] border-[#E2E8F0] text-[#64748B] hover:border-[#3B82F6]/50"
                           }`}
                         >
                           {i}
@@ -355,12 +348,12 @@ const Assessment = () => {
                 </div>
 
                 {/* Skills */}
-                <div className="space-y-3">
-                  <Label htmlFor="skills">Skills</Label>
-                  <div className="flex gap-2">
+                <div className="space-y-4">
+                  <Label htmlFor="skills" className="text-xs font-bold text-[#64748B] uppercase tracking-wider">Key Skills</Label>
+                  <div className="flex gap-3">
                     <Input
                       id="skills"
-                      placeholder="Type a skill and press Enter"
+                      placeholder="Type skill (e.g. Python) & Enter"
                       value={skillInput}
                       onChange={(e) => setSkillInput(e.target.value)}
                       onKeyDown={(e) => {
@@ -369,33 +362,33 @@ const Assessment = () => {
                           addSkill();
                         }
                       }}
-                      className="h-12 bg-background/40 border-border focus-visible:ring-primary/60 focus-visible:border-primary/60"
+                      className="h-14 bg-[#F8FAFC] border-[#E2E8F0] focus-visible:ring-[#3B82F6]/20 rounded-xl"
                     />
                     <Button
                       type="button"
-                      variant="glass"
+                      variant="outline"
                       size="icon"
-                      className="h-12 w-12 flex-shrink-0"
+                      className="h-14 w-14 flex-shrink-0 rounded-xl border-[#E2E8F0]"
                       onClick={() => addSkill()}
                     >
-                      <Plus className="h-5 w-5" />
+                      <Plus className="h-6 w-6 text-[#3B82F6]" />
                     </Button>
                   </div>
                   {skills.length > 0 && (
-                    <div className="flex flex-wrap gap-2 pt-1">
+                    <div className="flex flex-wrap gap-2.5 pt-2">
                       {skills.map((s) => (
                         <span
                           key={s}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm bg-primary/15 border border-primary/30 text-foreground"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-[#EFF6FF] border border-[#DBEAFE] text-[#2563EB]"
                         >
                           {s}
                           <button
                             type="button"
                             onClick={() => removeSkill(s)}
-                            className="hover:text-destructive transition-colors"
+                            className="hover:text-[#EF4444] transition-colors"
                             aria-label={`Remove ${s}`}
                           >
-                            <X className="h-3.5 w-3.5" />
+                            <X className="h-4 w-4" />
                           </button>
                         </span>
                       ))}
@@ -405,26 +398,29 @@ const Assessment = () => {
 
                 {/* Goals */}
                 <div className="space-y-2">
-                  <Label htmlFor="goals">Career Goals</Label>
+                  <Label htmlFor="goals" className="text-xs font-bold text-[#64748B] uppercase tracking-wider">Ultimate Career Goals</Label>
                   <Textarea
                     id="goals"
                     rows={4}
-                    placeholder="Describe your career goals or dream job…"
+                    placeholder="Describe your long-term vision or dream job in detail…"
                     value={goals}
                     onChange={(e) => setGoals(e.target.value)}
-                    className="bg-background/40 border-border focus-visible:ring-primary/60 focus-visible:border-primary/60 resize-none"
+                    className="bg-[#F8FAFC] border-[#E2E8F0] focus-visible:ring-[#3B82F6]/20 rounded-xl resize-none p-5 text-base"
                   />
                 </div>
 
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <Label>AI Behavior & Interest Questions</Label>
+                <div className="space-y-6 pt-4 border-t border-[#F1F5F9]">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                      <h3 className="font-bold text-[#0F172A]">AI Behavioral Analysis</h3>
+                      <p className="text-xs text-[#64748B] font-medium">Answer these to get high-confidence career predictions.</p>
+                    </div>
                     <Button
                       type="button"
-                      variant="glass"
-                      size="sm"
+                      variant="outline"
                       onClick={generateAiQuestions}
                       disabled={questionsLoading}
+                      className="rounded-xl border-[#3B82F6]/20 text-[#3B82F6] hover:bg-[#3B82F6] hover:text-white font-bold h-11"
                     >
                       {questionsLoading ? (
                         <>
@@ -432,16 +428,19 @@ const Assessment = () => {
                           Generating...
                         </>
                       ) : (
-                        "Ask AI Questions"
+                        <>
+                          <Sparkles className="mr-2 h-4 w-4" />
+                          Generate Questions
+                        </>
                       )}
                     </Button>
                   </div>
 
                   {aiQuestions.length > 0 ? (
-                    <div className="space-y-4">
+                    <div className="space-y-6 animate-fade-up">
                       {aiQuestions.map((question, index) => (
-                        <div key={`${question}-${index}`} className="space-y-2">
-                          <p className="text-sm font-medium text-foreground">
+                        <div key={`${question}-${index}`} className="space-y-3">
+                          <p className="text-sm font-bold text-[#334155]">
                             {index + 1}. {question}
                           </p>
                           <Textarea
@@ -454,85 +453,89 @@ const Assessment = () => {
                                 [index]: e.target.value,
                               }))
                             }
-                            className="bg-background/40 border-border focus-visible:ring-primary/60 focus-visible:border-primary/60 resize-none"
+                            className="bg-[#F8FAFC] border-[#E2E8F0] focus-visible:ring-[#3B82F6]/20 rounded-xl resize-none p-4"
                           />
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <p className="text-sm text-muted-foreground">
-                      Click "Ask AI Questions" to get personalized behavior and interest questions.
-                    </p>
+                    <div className="bg-[#F8FAFC] border border-dashed border-[#E2E8F0] p-8 rounded-2xl text-center">
+                      <p className="text-sm text-[#64748B] font-medium">
+                        Click "Generate Questions" to let AI interview you for better accuracy.
+                      </p>
+                    </div>
                   )}
                 </div>
 
-                <div className="flex justify-between gap-3 pt-2">
-                  <Button variant="glass" size="lg" onClick={() => setStep(1)}>
-                    Back
+                <div className="flex justify-between gap-4 pt-4">
+                  <Button variant="ghost" size="lg" onClick={() => setStep(1)} className="font-bold text-[#64748B] h-14 px-8">
+                    Go Back
                   </Button>
-                  <Button variant="hero" size="lg" onClick={handleAnalyze}>
-                    Analyze with AI <Flame className="ml-1 h-4 w-4" />
+                  <Button variant="hero" size="lg" onClick={handleAnalyze} className="bg-[#3B82F6] hover:bg-[#2563EB] text-white h-14 px-10 rounded-xl font-bold shadow-soft">
+                    Analyze My Career <Flame className="ml-2 h-5 w-5" />
                   </Button>
                 </div>
               </div>
             )}
 
             {step === 3 && (
-              <div className="py-6 flex flex-col items-center animate-fade-up">
+              <div className="py-8 flex flex-col items-center animate-fade-up">
                 {loading ? (
                   <div className="text-center">
-                    <div className="relative h-24 w-24 mb-6 mx-auto">
-                      <div className="absolute inset-0 rounded-full bg-gradient-primary blur-2xl opacity-60 animate-pulse-glow" />
-                      <div className="relative h-full w-full rounded-full glass flex items-center justify-center">
-                        <Loader2 className="h-10 w-10 text-primary animate-spin" />
+                    <div className="relative h-20 w-20 mb-10 mx-auto">
+                      <div className="relative h-full w-full rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center shadow-soft">
+                        <Loader2 className="h-8 w-8 text-[#3B82F6] animate-spin" />
                       </div>
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-bold mb-2">
-                      Analyzing your <span className="text-gradient">profile</span>
+                    <h2 className="text-2xl md:text-4xl font-bold mb-3 text-[#0F172A]">
+                      Deep Intelligence <span className="text-[#3B82F6]">Processing</span>
                     </h2>
-                    <p className="text-muted-foreground max-w-md mx-auto">
-                      Our AI is crunching your interests, skills, and goals to map the perfect career paths for you…
+                    <p className="text-[#64748B] text-lg max-w-sm mx-auto font-medium">
+                      Our algorithms are mapping your psyche to thousands of career trajectories…
                     </p>
                   </div>
                 ) : prediction ? (
-                  <div className="w-full space-y-8">
+                  <div className="w-full space-y-12">
                     <div className="text-center">
-                      <div className="h-20 w-20 rounded-full bg-gradient-primary flex items-center justify-center shadow-glow mb-6 mx-auto">
-                        <Sparkles className="h-10 w-10 text-primary-foreground" />
+                      <div className="h-20 w-20 rounded-3xl bg-[#3B82F6] flex items-center justify-center shadow-elevated mb-8 mx-auto rotate-3">
+                        <Sparkles className="h-10 w-10 text-white" />
                       </div>
-                      <h2 className="text-3xl md:text-4xl font-bold mb-2">
-                        Your Best Fit: <span className="text-gradient">{prediction?.predictedField || "Career Path"}</span>
+                      <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#0F172A]">
+                        Predicted Fit: <span className="text-[#3B82F6]">{prediction?.predictedField || "Career Path"}</span>
                       </h2>
-                      <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium mb-4">
-                        <Badge variant="outline" className="border-primary/30">{prediction?.careerCluster || "General"}</Badge>
-                        <span>{prediction?.confidence || 0}% Match Confidence</span>
+                      <div className="flex items-center justify-center gap-3 mb-6">
+                        <Badge variant="outline" className="border-[#3B82F6]/30 text-[#3B82F6] bg-[#EFF6FF] px-4 py-1.5 font-bold uppercase tracking-widest text-[10px]">{prediction?.careerCluster || "General"}</Badge>
+                        <span className="text-sm font-bold text-[#10B981]">{prediction?.confidence || 0}% Confidence</span>
                       </div>
-                      <p className="text-muted-foreground max-w-2xl mx-auto italic">
+                      <p className="text-[#64748B] text-lg max-w-2xl mx-auto font-medium leading-relaxed">
                         "{prediction?.finalAdvice || "Continue exploring your potential."}"
                       </p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="glass-strong p-6 rounded-2xl border border-primary/20">
-                        <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                          <Check className="h-5 w-5 text-primary" /> Why This Fits You
+                    <div className="grid md:grid-cols-2 gap-8">
+                      <div className="bg-white border border-[#E5E7EB] p-8 rounded-[2rem] shadow-soft">
+                        <h3 className="text-xl font-bold mb-6 flex items-center gap-3 text-[#0F172A]">
+                          <Check className="h-6 w-6 text-[#10B981]" /> Why This Fits You
                         </h3>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4">
                           {(prediction?.whyThisFieldFits || []).map((reason: string, i: number) => (
-                            <li key={i} className="text-sm flex gap-2">
-                              <span className="text-primary font-bold">•</span> {reason}
+                            <li key={i} className="text-[15px] font-medium text-[#475569] flex gap-3">
+                              <span className="text-[#3B82F6] text-xl leading-none font-black">•</span> {reason}
                             </li>
                           ))}
                         </ul>
                       </div>
 
-                      <div className="glass-strong p-6 rounded-2xl border border-secondary/20">
-                        <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                          <Flame className="h-5 w-5 text-secondary" /> Top Traits Detected
+                      <div className="bg-[#0F172A] p-8 rounded-[2rem] shadow-elevated text-white overflow-hidden relative">
+                        <div className="absolute -top-10 -right-10 opacity-10">
+                          <Flame className="w-40 h-40 text-orange-500" />
+                        </div>
+                        <h3 className="text-xl font-bold mb-6 flex items-center gap-3 relative z-10">
+                          <Flame className="h-6 w-6 text-[#F59E0B]" /> Core Traits Detected
                         </h3>
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-2 relative z-10">
                           {(prediction?.topTraitsDetected || []).map((trait: string, i: number) => (
-                            <Badge key={i} variant="secondary" className="bg-secondary/10 text-secondary border-secondary/20">
+                            <Badge key={i} variant="secondary" className="bg-white/10 hover:bg-white/20 border-transparent text-white px-3 py-1 font-bold">
                               {trait}
                             </Badge>
                           ))}
@@ -540,85 +543,96 @@ const Assessment = () => {
                       </div>
                     </div>
 
-                    <div className="space-y-4">
-                      <h3 className="text-xl font-bold border-b pb-2">Recommended Career Roadmap</h3>
-                      <div className="space-y-4">
+                    <div className="space-y-6">
+                      <h3 className="text-2xl font-bold text-[#0F172A] border-b border-[#F1F5F9] pb-4">Strategic Execution Roadmap</h3>
+                      <div className="space-y-6 relative ml-4 border-l-2 border-[#DBEAFE] pl-10 pt-2 pb-2">
                         {((prediction as Record<string, unknown>)?.roadmap as Array<{ step: number; title: string; details: string }> || []).map((item, i: number) => (
-                          <div key={i} className="flex gap-4 items-start">
-                            <div className="h-8 w-8 rounded-full bg-primary/20 text-primary flex items-center justify-center flex-shrink-0 font-bold text-sm">
+                          <div key={i} className="relative">
+                            <div className="absolute -left-[54px] top-0 h-10 w-10 rounded-2xl bg-white border-2 border-[#3B82F6] text-[#3B82F6] flex items-center justify-center font-bold text-sm shadow-soft">
                               {item.step}
                             </div>
                             <div>
-                              <h4 className="font-bold">{item.title}</h4>
-                              <p className="text-sm text-muted-foreground">{item.details}</p>
+                              <h4 className="font-bold text-lg text-[#0F172A] mb-1">{item.title}</h4>
+                              <p className="text-[#64748B] text-sm leading-relaxed">{item.details}</p>
                             </div>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-4">
-                      <div className="glass p-4 rounded-xl">
-                        <h4 className="text-sm font-bold text-muted-foreground mb-2 uppercase tracking-wider">Education Path</h4>
-                        <ul className="text-sm space-y-1">
+                    <div className="grid md:grid-cols-3 gap-6">
+                      <div className="bg-white border border-[#E2E8F0] p-6 rounded-2xl shadow-soft">
+                        <h4 className="text-[10px] font-bold text-[#94A3B8] mb-4 uppercase tracking-widest">Education Path</h4>
+                        <ul className="text-sm font-bold text-[#334155] space-y-2">
                           {(prediction?.recommendedPathway?.degreeOptions || []).map((opt: string, i: number) => (
-                            <li key={i}>• {opt}</li>
+                            <li key={i} className="flex items-start gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#3B82F6] mt-1.5 shrink-0" />
+                              {opt}
+                            </li>
                           ))}
                         </ul>
                       </div>
-                      <div className="glass p-4 rounded-xl">
-                        <h4 className="text-sm font-bold text-muted-foreground mb-2 uppercase tracking-wider">Entrance Exams</h4>
-                        <ul className="text-sm space-y-1">
+                      <div className="bg-white border border-[#E2E8F0] p-6 rounded-2xl shadow-soft">
+                        <h4 className="text-[10px] font-bold text-[#94A3B8] mb-4 uppercase tracking-widest">Crucial Exams</h4>
+                        <ul className="text-sm font-bold text-[#334155] space-y-2">
                           {((prediction as Record<string, unknown>)?.entranceExams as Array<{ exam: string; purpose?: string }> || []).map((exam, i: number) => (
-                            <li key={i} title={exam?.purpose}>• {exam?.exam}</li>
+                            <li key={i} title={exam?.purpose} className="flex items-start gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B] mt-1.5 shrink-0" />
+                              {exam?.exam}
+                            </li>
                           ))}
                         </ul>
                       </div>
-                      <div className="glass p-4 rounded-xl">
-                        <h4 className="text-sm font-bold text-muted-foreground mb-2 uppercase tracking-wider">Job Roles</h4>
-                        <ul className="text-sm space-y-1">
+                      <div className="bg-white border border-[#E2E8F0] p-6 rounded-2xl shadow-soft">
+                        <h4 className="text-[10px] font-bold text-[#94A3B8] mb-4 uppercase tracking-widest">Potential Roles</h4>
+                        <ul className="text-sm font-bold text-[#334155] space-y-2">
                           {(prediction?.jobRoles || []).map((role: string, i: number) => (
-                            <li key={i}>• {role}</li>
+                            <li key={i} className="flex items-start gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] mt-1.5 shrink-0" />
+                              {role}
+                            </li>
                           ))}
                         </ul>
                       </div>
                     </div>
 
                     {prediction?.backupField && (
-                      <div className="bg-muted/30 p-4 rounded-xl border border-dashed border-muted-foreground/30">
-                        <h4 className="text-sm font-bold text-muted-foreground mb-1">Backup Recommendation</h4>
-                        <p className="text-sm">
-                          <span className="font-bold text-foreground">{prediction?.backupField?.field}</span>: {prediction?.backupField?.reason}
+                      <div className="bg-[#F8FAFC] border border-[#E2E8F0] p-6 rounded-2xl">
+                        <h4 className="text-[10px] font-bold text-[#94A3B8] mb-2 uppercase tracking-widest flex items-center gap-2">
+                          <Check className="h-4 w-4" /> Contingency Pathway
+                        </h4>
+                        <p className="text-sm font-medium text-[#475569]">
+                          <span className="font-bold text-[#0F172A]">{prediction?.backupField?.field}</span> — {prediction?.backupField?.reason}
                         </p>
                       </div>
                     )}
 
-                    <div className="flex justify-center gap-3 pt-6 border-t">
-                      <Button variant="glass" size="lg" onClick={() => { setStep(1); setPrediction(null); }}>
-                        Retake Assessment
+                    <div className="flex flex-col sm:flex-row justify-center gap-4 pt-8 border-t border-[#F1F5F9]">
+                      <Button variant="outline" size="lg" onClick={() => { setStep(1); setPrediction(null); }} className="font-bold h-14 rounded-xl px-10 border-[#E2E8F0] text-[#64748B]">
+                        Retake Evaluation
                       </Button>
-                      <Button variant="hero" size="lg" onClick={() => navigate("/explore")}>
-                        Explore More Careers
+                      <Button variant="hero" size="lg" onClick={() => navigate("/explore")} className="bg-[#3B82F6] hover:bg-[#2563EB] text-white h-14 rounded-xl px-12 font-bold shadow-soft">
+                        Discover Career Cards
                       </Button>
                     </div>
                   </div>
                 ) : (
-                  <div className="text-center">
-                    <div className="h-20 w-20 rounded-full bg-gradient-primary flex items-center justify-center shadow-glow mb-6 mx-auto">
-                      <Check className="h-10 w-10 text-primary-foreground" />
+                  <div className="text-center py-10">
+                    <div className="h-24 w-24 rounded-[2rem] bg-[#ECFDF5] border border-[#D1FAE5] flex items-center justify-center shadow-soft mb-8 mx-auto -rotate-6">
+                      <Check className="h-12 w-12 text-[#10B981]" />
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-bold mb-2">
-                      Your insights are <span className="text-gradient">ready</span>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#0F172A]">
+                      Your Insights Are <span className="text-[#3B82F6]">Ready</span>
                     </h2>
-                    <p className="text-muted-foreground max-w-md mb-6 mx-auto">
-                      We've prepared a personalized career roadmap based on your assessment.
+                    <p className="text-[#64748B] text-lg max-w-md mb-10 mx-auto font-medium">
+                      We've compiled your high-precision career blueprints and strategic roadmaps.
                     </p>
-                    <div className="flex gap-3 justify-center">
-                      <Button variant="glass" size="lg" onClick={() => { setStep(1); }}>
-                        Retake
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Button variant="outline" size="lg" onClick={() => { setStep(1); }} className="h-14 px-8 rounded-xl font-bold text-[#64748B]">
+                        Restart
                       </Button>
-                      <Button variant="hero" size="lg" onClick={() => navigate("/")}>
-                        View Recommendations
+                      <Button variant="hero" size="lg" onClick={() => navigate("/")} className="bg-[#3B82F6] hover:bg-[#2563EB] text-white h-14 px-12 rounded-xl font-bold shadow-soft">
+                        Go to Dashboard
                       </Button>
                     </div>
                   </div>

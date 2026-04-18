@@ -66,17 +66,14 @@ const Navbar = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass-strong py-3" : "py-5 bg-transparent"
+        scrolled ? "bg-white border-b border-border py-3 shadow-soft" : "py-5 bg-transparent"
       }`}
     >
       <nav className="container flex items-center justify-between">
         <a href="#home" className="flex items-center gap-2 group">
-          <div className="relative">
-            <div className="absolute inset-0 bg-primary/40 blur-xl rounded-full group-hover:bg-primary/60 transition" />
-            <img src={logo} alt="Cognera AI logo" className="relative h-12 w-12 md:h-14 md:w-14 rounded-xl object-contain" />
-          </div>
-          <span className="font-display font-bold text-2xl md:text-3xl tracking-tight">
-            Cognera <span className="text-gradient">AI</span>
+          <img src={logo} alt="Cognera AI logo" className="h-10 w-10 md:h-12 md:w-12 rounded-lg object-contain" />
+          <span className="font-display font-bold text-xl md:text-2xl tracking-tight text-[#0F172A]">
+            Cognera <span className="text-[#3B82F6]">AI</span>
           </span>
         </a>
 
@@ -85,9 +82,10 @@ const Navbar = () => {
             <li key={l.href}>
               <Link
                 to={l.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative after:absolute after:bottom-[-6px] after:left-0 after:h-[2px] after:w-0 after:bg-gradient-primary after:transition-all hover:after:w-full"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-all relative group-hover:text-primary"
               >
                 {l.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
               </Link>
             </li>
           ))}
@@ -135,7 +133,7 @@ const Navbar = () => {
         </div>
 
         <button
-          className="lg:hidden p-2 rounded-lg glass"
+          className="lg:hidden p-2 rounded-lg border border-border bg-white text-foreground"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -144,25 +142,25 @@ const Navbar = () => {
       </nav>
 
       {open && (
-        <div className="lg:hidden glass-strong mt-3 mx-4 rounded-2xl p-6 animate-scale-in">
+        <div className="lg:hidden bg-white mt-3 mx-4 rounded-2xl p-6 shadow-elevated border border-border animate-scale-in">
           <ul className="flex flex-col gap-4 mb-4">
             {links.map((l) => (
               <li key={l.href}>
                 <Link
                   to={l.href}
                   onClick={() => setOpen(false)}
-                  className="block text-base font-medium text-muted-foreground hover:text-foreground"
+                  className="block text-base font-medium text-[#334155] hover:text-[#3B82F6] transition-colors"
                 >
                   {l.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="flex flex-col gap-2 pt-4 border-t border-border/50">
+          <div className="flex flex-col gap-2 pt-4 border-t border-border">
             {user ? (
               <>
-                <div className="flex items-center gap-2 pl-2 py-2 text-sm text-foreground">
-                  <UserIcon className="h-4 w-4 text-primary" /> {displayName}
+                <div className="flex items-center gap-2 pl-2 py-2 text-sm text-[#334155]">
+                  <UserIcon className="h-4 w-4 text-[#3B82F6]" /> {displayName}
                 </div>
                 <Button variant="ghost" onClick={handleLogout} className="justify-start text-destructive">
                   <LogOut className="h-4 w-4 mr-2" /> Logout
@@ -171,7 +169,7 @@ const Navbar = () => {
             ) : (
               <>
                 <Button variant="ghost" onClick={() => openAuth("login")}>Login</Button>
-                <Button variant="outline" className="border-primary/30" onClick={() => openAuth("signup")}>Signup</Button>
+                <Button variant="outline" className="border-primary/60 text-primary" onClick={() => openAuth("signup")}>Signup</Button>
               </>
             )}
             <Button variant="hero" onClick={goAssessment}>Start Assessment <Flame className="ml-1 h-4 w-4" /></Button>

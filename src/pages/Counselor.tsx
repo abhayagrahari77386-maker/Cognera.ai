@@ -235,78 +235,70 @@ const Counselor = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#334155] overflow-x-hidden">
       <Navbar />
-
-      {/* Background atmosphere */}
-      <div className="fixed inset-0 -z-10 pointer-events-none">
-        <div className="glow-orb animate-float-slow" style={{ top: -120, left: -120, width: 420, height: 420, background: "hsl(217 92% 60% / 0.55)" }} />
-        <div className="glow-orb animate-float-slow" style={{ bottom: -160, right: -120, width: 480, height: 480, background: "hsl(262 83% 58% / 0.5)" }} />
-        <div className="grid-bg absolute inset-0 opacity-40" />
-      </div>
 
       <main className="container max-w-4xl pt-32 pb-16">
         {/* Header */}
-        <div className="text-center mb-8 animate-fade-up">
-          <div className="inline-flex items-center gap-2 glass px-4 py-1.5 rounded-full text-sm">
-            <Sparkles className="h-4 w-4 text-primary" />
-            <span className="text-muted-foreground">Powered by Cognera AI</span>
+        <div className="text-center mb-10 animate-fade-up">
+          <div className="inline-flex items-center gap-2 bg-[#DBEAFE] border border-[#BFDBFE] px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+            <Sparkles className="h-4 w-4 text-[#3B82F6]" />
+            <span className="text-[#1D4ED8]">Powered by Cognera AI</span>
           </div>
-          <h1 className="font-display font-bold text-4xl md:text-5xl mt-5">
-            AI Career <span className="text-gradient">Counselor</span> 🤖
+          <h1 className="font-display font-bold text-4xl md:text-5xl text-[#0F172A]">
+            AI Career <span className="text-[#3B82F6]">Counselor</span> 🤖
           </h1>
-          <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
-            Ask anything about your career confusion and get AI guidance instantly.
+          <p className="text-[#64748B] text-lg mt-4 max-w-xl mx-auto">
+            Get instant, intelligent guidance on your career path, skills, and goals.
           </p>
         </div>
 
         {/* Chat card */}
-        <div className="glass rounded-3xl overflow-hidden border border-primary/20 shadow-elevated">
+        <div className="bg-white rounded-[2rem] overflow-hidden border border-[#E5E7EB] shadow-elevated">
           {/* Card header */}
-          <div className="flex items-center gap-3 px-5 py-4 border-b border-primary/10 bg-card/50">
-            <div className="relative w-11 h-11 rounded-2xl bg-gradient-primary grid place-items-center font-bold text-primary-foreground shadow-glow">
+          <div className="flex items-center gap-4 px-6 py-5 border-b border-[#F1F5F9] bg-white">
+            <div className="relative w-12 h-12 rounded-2xl bg-[#3B82F6] grid place-items-center font-bold text-white shadow-soft">
               AI
-              <span className="absolute -right-0.5 -bottom-0.5 w-3 h-3 rounded-full bg-success ring-2 ring-card" />
+              <span className="absolute -right-0.5 -bottom-0.5 w-3.5 h-3.5 rounded-full bg-[#10B981] ring-2 ring-white" />
             </div>
             <div className="flex-1">
-              <div className="font-semibold">Cognera Counselor</div>
-              <div className="text-xs text-muted-foreground">Online · ready to help</div>
+              <div className="font-bold text-[#0F172A]">Cognera Expert</div>
+              <div className="text-xs font-semibold text-[#10B981] flex items-center gap-1.5Caps">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
+                Active now · Ready to help
+              </div>
             </div>
-            <Button variant="ghost" size="sm" onClick={clearChat} className="text-muted-foreground hover:text-foreground">
-              <Trash2 className="h-4 w-4 mr-1" /> Clear
+            <Button variant="ghost" size="sm" onClick={clearChat} className="text-[#64748B] hover:text-[#EF4444] hover:bg-red-50 font-bold transition-all">
+              <Trash2 className="h-4 w-4 mr-2" /> Clear
             </Button>
           </div>
 
           {/* Messages */}
           <div
             ref={scrollRef}
-            className="h-[460px] overflow-y-auto px-6 py-6 flex flex-col gap-4"
-            style={{
-              background:
-                "radial-gradient(circle at 20% 0%, hsl(217 92% 60% / 0.08), transparent 40%), radial-gradient(circle at 80% 100%, hsl(262 83% 58% / 0.08), transparent 40%)",
-            }}
+            className="h-[500px] overflow-y-auto px-6 py-8 flex flex-col gap-6 bg-[#F8FAFC]/30"
           >
             {messages.map((m) => (
               <div
                 key={m.id}
-                className={`flex gap-2.5 max-w-[82%] animate-scale-in ${
+                className={`flex gap-3.5 max-w-[85%] animate-fade-up ${
                   m.role === "user" ? "self-end flex-row-reverse" : "self-start"
                 }`}
               >
                 <div
-                  className={`w-8 h-8 rounded-xl grid place-items-center text-xs font-bold flex-shrink-0 ${
+                  className={`w-9 h-9 rounded-xl grid place-items-center text-[10px] font-black tracking-tighter flex-shrink-0 animate-scale-in border ${
                     m.role === "user"
-                      ? "bg-secondary/25 text-primary-glow"
-                      : "bg-gradient-primary text-primary-foreground"
+                      ? "bg-[#F1F5F9] text-[#475569] border-[#E2E8F0]"
+                      : "bg-[#3B82F6] text-white border-[#2563EB]"
                   }`}
                 >
-                  {m.role === "user" ? "You" : "AI"}
+                  {m.role === "user" ? "YOU" : "AI"}
                 </div>
                 <div
-                  className={`px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap break-words ${
+                  className={`px-5 py-4 rounded-2xl text-[15px] leading-relaxed whitespace-pre-wrap break-words shadow-sm transition-all ${
                     m.role === "user"
-                      ? "bg-gradient-primary text-primary-foreground rounded-br-md shadow-glow"
-                      : "bg-card/85 border border-primary/15 rounded-bl-md backdrop-blur-md"
+                      ? "bg-[#3B82F6] text-white rounded-tr-none"
+                      : "bg-white border border-[#E5E7EB] text-[#334155] rounded-tl-none"
                   }`}
                 >
                   {m.text}
@@ -315,15 +307,15 @@ const Counselor = () => {
             ))}
 
             {typing && (
-              <div className="flex gap-2.5 max-w-[82%] self-start animate-scale-in">
-                <div className="w-8 h-8 rounded-xl grid place-items-center text-xs font-bold bg-gradient-primary text-primary-foreground">
+              <div className="flex gap-3.5 max-w-[85%] self-start animate-fade-up">
+                <div className="w-9 h-9 rounded-xl grid place-items-center text-[10px] font-black tracking-tighter bg-[#3B82F6] text-white border border-[#2563EB] flex-shrink-0">
                   AI
                 </div>
-                <div className="px-4 py-3 rounded-2xl bg-card/85 border border-primary/15 rounded-bl-md backdrop-blur-md">
-                  <div className="flex gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary-glow animate-bounce" style={{ animationDelay: "0ms" }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary-glow animate-bounce" style={{ animationDelay: "150ms" }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary-glow animate-bounce" style={{ animationDelay: "300ms" }} />
+                <div className="px-5 py-4 rounded-2xl bg-white border border-[#E5E7EB] rounded-tl-none shadow-sm">
+                  <div className="flex gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#3B82F6] animate-bounce" style={{ animationDelay: "0ms" }} />
+                    <span className="w-2 h-2 rounded-full bg-[#3B82F6] animate-bounce" style={{ animationDelay: "150ms" }} />
+                    <span className="w-2 h-2 rounded-full bg-[#3B82F6] animate-bounce" style={{ animationDelay: "300ms" }} />
                   </div>
                 </div>
               </div>
@@ -331,55 +323,68 @@ const Counselor = () => {
           </div>
 
           {/* Suggestions */}
-          <div className="flex flex-wrap gap-2 px-5 pt-4">
-            <button
-              type="button"
-              onClick={startInterview}
-              className="px-3.5 py-2 rounded-full text-xs bg-primary/15 border border-primary/40 text-foreground hover:border-primary/70 hover:bg-primary/20 transition-all"
-            >
-              Start AI Interview (adaptive)
-            </button>
-            {SUGGESTIONS.map((s) => (
+          <div className="px-6 pt-6 pb-2">
+            <h4 className="text-[10px] font-bold text-[#94A3B8] uppercase tracking-widest mb-3 px-1">Common Questions</h4>
+            <div className="flex flex-wrap gap-2">
               <button
-                key={s}
                 type="button"
-                onClick={() => send(s)}
-                className="px-3.5 py-2 rounded-full text-xs bg-card/70 border border-primary/20 text-muted-foreground hover:text-foreground hover:border-primary/55 hover:bg-primary/10 hover:-translate-y-0.5 transition-all"
+                onClick={startInterview}
+                className="px-4 py-2 rounded-xl text-xs font-bold bg-[#3B82F6] text-white hover:bg-[#2563EB] transition-all shadow-soft"
               >
-                {s}
+                Start Career Analysis Interview
               </button>
-            ))}
+              {SUGGESTIONS.map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => send(s)}
+                  className="px-4 py-2 rounded-xl text-xs font-bold bg-[#F1F5F9] border border-[#E2E8F0] text-[#475569] hover:border-[#3B82F6] hover:text-[#3B82F6] hover:bg-white transition-all"
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Input row */}
-          {interviewMode && (
-            <div className="px-5 pt-3 text-xs text-muted-foreground">
-              Interview progress: {Math.min(interviewProgress, interviewTarget)}/{interviewTarget}
-            </div>
-          )}
-          <form
-            className="flex gap-2.5 p-4 md:p-5 border-t border-primary/10 bg-card/40"
-            onSubmit={(e) => {
-              e.preventDefault();
-              send(input);
-            }}
-          >
-            <Input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder={interviewMode ? "Type your answer..." : "Type your career question…"}
-              className="flex-1 h-12 rounded-2xl bg-card/85 border-primary/20 focus-visible:border-primary/70 focus-visible:ring-primary/15"
-              aria-label="Type your career question"
-            />
-            <Button type="submit" variant="hero" className="h-12 rounded-2xl px-5" disabled={!input.trim() || typing}>
-              <Send className="h-4 w-4 md:mr-2" />
-              <span className="hidden md:inline">Send</span>
-            </Button>
-          </form>
+          <div className="p-6">
+            {interviewMode && (
+              <div className="flex items-center gap-3 mb-4 px-2">
+                <div className="flex-1 h-1.5 bg-[#F1F5F9] rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-[#3B82F6] transition-all duration-500" 
+                    style={{ width: `${(Math.min(interviewProgress, interviewTarget) / interviewTarget) * 100}%` }}
+                  />
+                </div>
+                <span className="text-[10px] font-black text-[#64748B] uppercase tracking-tighter">
+                  Analysis Progress: {Math.min(interviewProgress, interviewTarget)}/{interviewTarget}
+                </span>
+              </div>
+            )}
+            <form
+              className="flex gap-3"
+              onSubmit={(e) => {
+                e.preventDefault();
+                send(input);
+              }}
+            >
+              <Input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={interviewMode ? "Provide your detailed answer..." : "Ask your career question…"}
+                className="flex-1 h-14 rounded-2xl bg-[#F8FAFC] border-[#E5E7EB] focus-visible:ring-[#3B82F6]/20 text-base px-6 font-medium"
+                aria-label="Type your career question"
+              />
+              <Button type="submit" variant="hero" className="h-14 rounded-2xl px-8 bg-[#3B82F6] hover:bg-[#2563EB] text-white shadow-soft font-bold" disabled={!input.trim() || typing}>
+                <Send className="h-5 w-5 md:mr-2" />
+                <span className="hidden md:inline">Send Message</span>
+              </Button>
+            </form>
+          </div>
         </div>
 
-        <p className="text-center mt-5 text-xs text-muted-foreground">
-          Tip: Press <kbd className="px-1.5 py-0.5 rounded border border-primary/20 bg-card">Enter</kbd> to send. Responses are AI-generated suggestions, not professional advice.
+        <p className="text-center mt-6 text-xs font-medium text-[#94A3B8]">
+          Shift + Enter for new line. AI suggestions are for guidance only.
         </p>
       </main>
 
