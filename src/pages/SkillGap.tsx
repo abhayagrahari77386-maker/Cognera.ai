@@ -84,11 +84,12 @@ export default function SkillGap() {
         description: "Your personalized skill gap roadmap is ready.",
       });
       
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred during analysis.";
       console.error(error);
       toast({
         title: "Analysis Failed",
-        description: error.message || "An unexpected error occurred during analysis.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {

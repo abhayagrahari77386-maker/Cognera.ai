@@ -20,13 +20,13 @@ export async function extractTextFromPDF(file: File): Promise<string> {
           const page = await pdf.getPage(pageNum);
           const textContent = await page.getTextContent();
           
-          // @ts-ignore - The types for TextItem in this version are slightly imperfect
-          const pageText = textContent.items.map(item => item.str).join(' ');
+          // @ts-expect-error - The types for TextItem in this version are slightly imperfect, but we know str exists on text items here
+          const pageText = textContent.items.map((item: unknown) => (item as { str?: string }).str || "").join(' ');
           fullText += pageText + '\n\n';
         }
 
         resolve(fullText.trim());
-      } catch (error) {
+      } catch (error: unknown) {
         console.error('Error parsing PDF:', error);
         reject(error);
       }

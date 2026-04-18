@@ -161,11 +161,11 @@ const Counselor = () => {
           const p = data.prediction;
           const compared = (p.comparedFieldScores || [])
             .slice(0, 5)
-            .map((x: any) => `- ${x.field}: ${x.score}/100 (${x.reason})`)
+            .map((x: { field: string; score: number; reason: string }) => `- ${x.field}: ${x.score}/100 (${x.reason})`)
             .join("\n");
           const rejected = (p.rejectedFields || [])
             .slice(0, 3)
-            .map((x: any) => `- ${x.field}: ${x.reason}`)
+            .map((x: { field: string; reason: string }) => `- ${x.field}: ${x.reason}`)
             .join("\n");
 
           const resultText = `Best-fit field: ${p.predictedField}\nCluster: ${p.careerCluster}\nConfidence: ${p.confidence}%\n\nWhy this fits:\n- ${(p.whyThisFieldFits || []).join("\n- ")}\n\nCompared fields:\n${compared || "- Analysis completed across major clusters."}\n\nLower-fit fields:\n${rejected || "- Not enough mismatch data provided."}\n\nNext steps:\n- ${(p.nextSteps || []).join("\n- ")}`;

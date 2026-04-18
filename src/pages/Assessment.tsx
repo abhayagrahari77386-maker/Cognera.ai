@@ -47,7 +47,7 @@ const Assessment = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [prediction, setPrediction] = useState<any>(null);
+  const [prediction, setPrediction] = useState<Record<string, unknown> | null>(null);
 
   // Step 1
   const [fullName, setFullName] = useState("");
@@ -543,7 +543,7 @@ const Assessment = () => {
                     <div className="space-y-4">
                       <h3 className="text-xl font-bold border-b pb-2">Recommended Career Roadmap</h3>
                       <div className="space-y-4">
-                        {(prediction?.roadmap || []).map((item: any, i: number) => (
+                        {((prediction as Record<string, unknown>)?.roadmap as Array<{ step: number; title: string; details: string }> || []).map((item, i: number) => (
                           <div key={i} className="flex gap-4 items-start">
                             <div className="h-8 w-8 rounded-full bg-primary/20 text-primary flex items-center justify-center flex-shrink-0 font-bold text-sm">
                               {item.step}
@@ -569,7 +569,7 @@ const Assessment = () => {
                       <div className="glass p-4 rounded-xl">
                         <h4 className="text-sm font-bold text-muted-foreground mb-2 uppercase tracking-wider">Entrance Exams</h4>
                         <ul className="text-sm space-y-1">
-                          {(prediction?.entranceExams || []).map((exam: any, i: number) => (
+                          {((prediction as Record<string, unknown>)?.entranceExams as Array<{ exam: string; purpose?: string }> || []).map((exam, i: number) => (
                             <li key={i} title={exam?.purpose}>• {exam?.exam}</li>
                           ))}
                         </ul>

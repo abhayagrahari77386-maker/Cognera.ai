@@ -11,6 +11,11 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 
 export type AuthMode = "login" | "signup";
 
+interface AuthError {
+  code?: string;
+  message?: string;
+}
+
 interface AuthModalProps {
   open: boolean;
   mode: AuthMode;
@@ -78,12 +83,13 @@ const AuthModal = ({ open, mode, onOpenChange, onModeChange }: AuthModalProps) =
       
       toast({ title: "Account created!", description: "Welcome to Cognera AI." });
       onOpenChange(false);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Auth error:", error);
-      let message = error.message;
-      if (error.code === 'auth/email-already-in-use') message = 'This email is already registered. Please login instead.';
-      if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') message = 'Invalid email or password.';
-      if (error.code === 'auth/weak-password') message = 'Password should be at least 6 characters.';
+      const firebaseError = error as AuthError;
+      let message = firebaseError.message || "An unexpected error occurred.";
+      if (firebaseError.code === 'auth/email-already-in-use') message = 'This email is already registered. Please login instead.';
+      if (firebaseError.code === 'auth/invalid-credential' || firebaseError.code === 'auth/wrong-password') message = 'Invalid email or password.';
+      if (firebaseError.code === 'auth/weak-password') message = 'Password should be at least 6 characters.';
 
       toast({ title: "Authentication failed", description: message, variant: "destructive" });
     } finally {
